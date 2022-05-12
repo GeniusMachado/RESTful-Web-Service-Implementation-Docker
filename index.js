@@ -1,17 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const path = require('path');
+const app = express();
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const port = 9000;
+const url = "mongodb://localhost:27017/College";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+/* Database Connection using mongoDB */
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+const con = mongoose.connection;
+app.use(express.json());
+try {
+    con.on('open', () => {
+        console.log('connected');
+    })
+} catch (error) {
+    console.log("Error: " + error);
+}
+
+/* Template Engine */
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
+/* Body Parser */
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+/* Routes */
+const customerrouter = require("./routes/customers");
+
+app.get('/', function(req, res){
+    res.redirect('/customers');
+});
+
+app.use('/customers', customerrouter)
+
+
+const errController = require('./controllers/error-controller')
+app.use(errController.show404Page);
+
+app.listen(port, () => {
+    console.log('Server started and running on: ', port);
+})
+

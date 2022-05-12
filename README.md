@@ -45,7 +45,7 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
 ## Install
 
-    $ git clone https://github.com/akshaysen08/cs-612-assignment-5
+    $ git clone https://github.com/geniusmachado/cs-612-assignment-5
     $ cd cs-612-assignment-5
     $ yarn install
 
@@ -84,13 +84,13 @@ Steps to Build and Run a Docker image and container
 
 ### BUILD
 ```shell
-sudo docker build -t akshaysen08/assignment-5-612
+sudo docker build -t geniusmachado/assignment-5-612
 ```
 
  
 ### RUN
 ```shell
-docker run --name customer-apis-container -p 80:9000 -d akshaysen08/assignment-5-612
+docker run --name customer-apis-container -p 80:9000 -d geniusmachado/assignment-5-612
 ```
 
 To restart your container
@@ -106,7 +106,7 @@ docker restart customer-apis-container
 
 ## Authors
 
-* **Akshay Sen/ Chandani Reddy** - *Initial work* - [akshaysen08](https://github.com/akshaysen08)
+* **Genius Machado/ Shivani Chavan** - *Initial work* - [geniusmachado](https://github.com/geniusmachado)
 
 
 
